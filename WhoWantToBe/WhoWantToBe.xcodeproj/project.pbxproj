@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		FE13277825811ADA00814013 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE13277725811ADA00814013 /* AppDelegate.swift */; };
-		FE13277A25811ADA00814013 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE13277925811ADA00814013 /* SceneDelegate.swift */; };
 		FE13277C25811ADA00814013 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE13277B25811ADA00814013 /* StartViewController.swift */; };
 		FE13277F25811ADA00814013 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE13277D25811ADA00814013 /* Main.storyboard */; };
 		FE13278125811ADC00814013 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE13278025811ADC00814013 /* Assets.xcassets */; };
 		FE13278425811ADC00814013 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE13278225811ADC00814013 /* LaunchScreen.storyboard */; };
 		FE13278E2582354800814013 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE13278D2582354800814013 /* GameViewController.swift */; };
 		FE1327912582430200814013 /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1327902582430200814013 /* Questions.swift */; };
+		FE5FAACD2587B42300900095 /* RecordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5FAACC2587B42300900095 /* RecordsTableViewController.swift */; };
+		FE5FAAD1258940D600900095 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5FAAD0258940D600900095 /* SceneDelegate.swift */; };
 		FE8DB2622584E6F6003401D2 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8DB2612584E6F6003401D2 /* Game.swift */; };
 		FE8DB2662584E70A003401D2 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8DB2652584E70A003401D2 /* GameSession.swift */; };
 		FE8DB26925877EB9003401D2 /* RecordsCaretaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8DB26825877EB9003401D2 /* RecordsCaretaker.swift */; };
@@ -23,7 +24,6 @@
 /* Begin PBXFileReference section */
 		FE13277425811ADA00814013 /* WhoWantToBe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhoWantToBe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE13277725811ADA00814013 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FE13277925811ADA00814013 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FE13277B25811ADA00814013 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		FE13277E25811ADA00814013 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FE13278025811ADC00814013 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -31,6 +31,8 @@
 		FE13278525811ADC00814013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE13278D2582354800814013 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		FE1327902582430200814013 /* Questions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
+		FE5FAACC2587B42300900095 /* RecordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTableViewController.swift; sourceTree = "<group>"; };
+		FE5FAAD0258940D600900095 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FE8DB2612584E6F6003401D2 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		FE8DB2652584E70A003401D2 /* GameSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSession.swift; sourceTree = "<group>"; };
 		FE8DB26825877EB9003401D2 /* RecordsCaretaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsCaretaker.swift; sourceTree = "<group>"; };
@@ -66,9 +68,10 @@
 		FE13277625811ADA00814013 /* WhoWantToBe */ = {
 			isa = PBXGroup;
 			children = (
+				FE5FAAD0258940D600900095 /* SceneDelegate.swift */,
 				FE13277725811ADA00814013 /* AppDelegate.swift */,
-				FE13277925811ADA00814013 /* SceneDelegate.swift */,
 				FE13277B25811ADA00814013 /* StartViewController.swift */,
+				FE5FAACC2587B42300900095 /* RecordsTableViewController.swift */,
 				FE13278D2582354800814013 /* GameViewController.swift */,
 				FE8DB2602584E6B1003401D2 /* GameModel */,
 				FE13277D25811ADA00814013 /* Main.storyboard */,
@@ -162,12 +165,13 @@
 			files = (
 				FE13278E2582354800814013 /* GameViewController.swift in Sources */,
 				FE8DB2622584E6F6003401D2 /* Game.swift in Sources */,
+				FE5FAAD1258940D600900095 /* SceneDelegate.swift in Sources */,
 				FE13277C25811ADA00814013 /* StartViewController.swift in Sources */,
+				FE5FAACD2587B42300900095 /* RecordsTableViewController.swift in Sources */,
 				FE13277825811ADA00814013 /* AppDelegate.swift in Sources */,
 				FE8DB2662584E70A003401D2 /* GameSession.swift in Sources */,
 				FE8DB26925877EB9003401D2 /* RecordsCaretaker.swift in Sources */,
 				FE1327912582430200814013 /* Questions.swift in Sources */,
-				FE13277A25811ADA00814013 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

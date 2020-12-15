@@ -9,12 +9,13 @@ import Foundation
 
 class Answer {
     
-    let id: Int
     let answer: String
     let correctAnswer: Bool
+
+    var disabled = false
+    var probability: Double?
     
-    init(id: Int, answer: String, correctAnswer: Bool) {
-        self.id = id
+    init(answer: String, correctAnswer: Bool) {
         self.answer = answer
         self.correctAnswer = correctAnswer
     }
@@ -23,51 +24,85 @@ class Answer {
 
 class Question {
     
-    let id: Int
     let question: String
     var answers: [Answer]
     
-    init(id: Int, question: String, answers: [Answer]) {
-        self.id = id
+    init(question: String, answers: [Answer]) {
         self.question = question
         self.answers = answers
     }
     
+    func fiftyFifty() {
+        var incorrectIDs: [Int] = []
+        for index in 0..<answers.count {
+            if !answers[index].correctAnswer {
+                incorrectIDs.append(index)
+            }
+        }
+        let numToDisable = answers.count / 2
+        for _ in 0..<numToDisable {
+            let index = Int.random(in: 0..<incorrectIDs.count)
+            let indexToDisable = incorrectIDs[index]
+            incorrectIDs.remove(at: index)
+            answers[indexToDisable].disabled = true
+        }
+    }
+    
+    func auditoryHelp(_ session: GameSession) {
+        let reduceProbability = 1.0 - (Double(session.answersCount)/Double(session.questions.count))
+        var votesForAnswers: [Int: Double] = [:]
+        var sumOfVotes = 0.0
+
+        for index in 0..<answers.count {
+            guard !answers[index].disabled else {continue}
+
+            var votes = Double.random(in: 1...1000)
+            if answers[index].correctAnswer {
+                votes += 1000.0 * reduceProbability
+            }
+
+            votesForAnswers[index] = votes
+            sumOfVotes += Double(votes)
+        }
+
+        for index in 0..<answers.count {
+            guard !answers[index].disabled,
+                  let votes = votesForAnswers[index]
+            else {continue}
+
+            answers[index].probability = votes / sumOfVotes
+        }
+    }
 }
 
 class QuestionsManager {
     
     private let questions: [Question] = [
-        Question(id: 0,
-                 question: "Как правильно продолжить припев детской песни: \"Тили-тили...\"?",
-                 answers: [Answer(id: 0, answer: "хали-гали", correctAnswer: false),
-                           Answer(id: 1, answer: "трали-вали", correctAnswer: true),
-                           Answer(id: 2, answer: "жили-были", correctAnswer: false),
-                           Answer(id: 3, answer: "ели-пили", correctAnswer: false)]),
-        Question(id: 1,
-                 question: "Что понадобится, чтобы взрыхлить землю на грядке?",
-                 answers: [Answer(id: 0, answer: "тяпка", correctAnswer: true),
-                           Answer(id: 1, answer: "бабка", correctAnswer: false),
-                           Answer(id: 2, answer: "скобка", correctAnswer: false),
-                           Answer(id: 3, answer: "тряпка", correctAnswer: false)]),
-        Question(id: 2,
-                 question: "Как называется экзотическое животное из Южной Америки?",
-                 answers: [Answer(id: 0, answer: "пчеложор", correctAnswer: false),
-                           Answer(id: 1, answer: "термитоглот", correctAnswer: false),
-                           Answer(id: 2, answer: "муравьед", correctAnswer: true),
-                           Answer(id: 3, answer: "комаролов", correctAnswer: false)]),
-        Question(id: 3,
-                 question: "Во что превращается гусеница?",
-                 answers: [Answer(id: 0, answer: "в мячик", correctAnswer: false),
-                           Answer(id: 1, answer: "в пирамидку", correctAnswer: false),
-                           Answer(id: 2, answer: "в машинку", correctAnswer: false),
-                           Answer(id: 3, answer: "в куколку", correctAnswer: true)]),
-        Question(id: 4,
-                 question: "В какой басне Крылова среди действующих лиц есть человек?",
-                 answers: [Answer(id: 0, answer: "Лягушка и Вол", correctAnswer: false),
-                           Answer(id: 1, answer: "Свинья под Дубом", correctAnswer: false),
-                           Answer(id: 2, answer: "Осел и Соловей", correctAnswer: false),
-                           Answer(id: 3, answer: "Волк на псарне", correctAnswer: true)]),
+        Question(question: "Как правильно продолжить припев детской песни: \"Тили-тили...\"?",
+                 answers: [Answer(answer: "хали-гали", correctAnswer: false),
+                           Answer(answer: "трали-вали", correctAnswer: true),
+                           Answer(answer: "жили-были", correctAnswer: false),
+                           Answer(answer: "ели-пили", correctAnswer: false)]),
+        Question(question: "Что понадобится, чтобы взрыхлить землю на грядке?",
+                 answers: [Answer(answer: "тяпка", correctAnswer: true),
+                           Answer(answer: "бабка", correctAnswer: false),
+                           Answer(answer: "скобка", correctAnswer: false),
+                           Answer(answer: "тряпка", correctAnswer: false)]),
+        Question(question: "Как называется экзотическое животное из Южной Америки?",
+                 answers: [Answer(answer: "пчеложор", correctAnswer: false),
+                           Answer(answer: "термитоглот", correctAnswer: false),
+                           Answer(answer: "муравьед", correctAnswer: true),
+                           Answer(answer: "комаролов", correctAnswer: false)]),
+        Question(question: "Во что превращается гусеница?",
+                 answers: [Answer(answer: "в мячик", correctAnswer: false),
+                           Answer(answer: "в пирамидку", correctAnswer: false),
+                           Answer(answer: "в машинку", correctAnswer: false),
+                           Answer(answer: "в куколку", correctAnswer: true)]),
+        Question(question: "В какой басне Крылова среди действующих лиц есть человек?",
+                 answers: [Answer(answer: "Лягушка и Вол", correctAnswer: false),
+                           Answer(answer: "Свинья под Дубом", correctAnswer: false),
+                           Answer(answer: "Осел и Соловей", correctAnswer: false),
+                           Answer(answer: "Волк на псарне", correctAnswer: true)]),
     ]
     
     static let shared = QuestionsManager()

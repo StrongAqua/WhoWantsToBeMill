@@ -39,3 +39,4 @@ extension StartViewController: GameViewControllerDelegate {
         gameResultLabel.text = "Вы ответили на: \(result) из \(total) вопросов"
     }
 }
+

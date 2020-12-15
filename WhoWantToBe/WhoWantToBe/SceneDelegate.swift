@@ -49,6 +49,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
-protocol GameSceneDelegate: class {
-    func didEndGame(withResult result: Int)
-}

@@ -33,9 +33,8 @@ class GameSession {
         questions = QuestionsManager.shared.getQuestionsForGame()
     }
     
-    func getAnswerText(_ variantNum: Int) -> String {
-        guard variantNum < 4 && variantNum >= 0 else {return ""}
-        return currentQuestion?.answers[variantNum].answer ?? "(error)"
+    func getCurrentQuestion() -> Question? {
+        return currentQuestion
     }
 
     func nextQuestion() {
@@ -57,6 +56,8 @@ class GameSession {
         gameSessionDelegate?.onGameOver(answersCount, questions.count)
         // call closure
         // gameOverEvent?(answersCount, questions.count)
+        
+        Game.shared.records.append(Record(date: Date(), value: answersCount))
     }
 
 }
@@ -66,8 +67,11 @@ extension GameSession: UserEventsDelegate {
     func onAnswerSelected(_ answerNum: Int) {
         guard answerNum < 4 else {return}
         guard let question = self.currentQuestion else {return}
+        
+        let answer = question.answers[answerNum]
+        if answer.disabled {return}
 
-        if question.answers[answerNum].correctAnswer == false {
+        if answer.correctAnswer == false {
             gameOver()
             return
         }
@@ -77,9 +81,7 @@ extension GameSession: UserEventsDelegate {
 
 }
 
-
 struct Record: Codable {
-    
     let date: Date
     let value: Int
 }

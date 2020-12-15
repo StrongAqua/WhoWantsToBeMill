@@ -16,8 +16,13 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var answersTable: UITableView!
     
+    @IBOutlet weak var fiftyFifty: UIButton!
+    @IBOutlet weak var askAudience: UIButton!
+    
     var delegate: GameViewControllerDelegate?
     var userEventsDelegate: UserEventsDelegate?
+    
+    var defaultTextColor: UIColor?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,18 +46,51 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     // MARK: - Table View Delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Game.shared.session?.questions.count ?? 0
+        Game.shared.session?.getCurrentQuestion()?.answers.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = answersTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = Game.shared.session?.getAnswerText(indexPath.row) ?? "(error)"
+        if let question = Game.shared.session?.getCurrentQuestion() {
+            let answer = question.answers[indexPath.row]
+            if (defaultTextColor == nil) {
+                defaultTextColor = cell.textLabel?.textColor ?? nil
+            }
+            var strProbability = ""
+            if let probability = answer.probability {
+                var p = probability * 100.0
+                p.round()
+                strProbability = " \(Int(p))%"
+            }
+            cell.textLabel?.text = answer.answer + strProbability
+            cell.textLabel?.textColor = answer.disabled ? UIColor.gray : defaultTextColor
+        } else {
+            cell.textLabel?.text = "(error)"
+            cell.textLabel?.textColor = UIColor.red
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         userEventsDelegate?.onAnswerSelected(indexPath.row)
     }
+    @IBAction func fiftyFifty(_ sender: UIButton) {
+        fiftyFifty.isHidden = true
+        if let question = Game.shared.session?.getCurrentQuestion() {
+            question.fiftyFifty()
+            answersTable.reloadData()
+        }
+    }
+    @IBAction func askAudience(_ sender: UIButton) {
+        askAudience.isHidden = true
+        guard let session = Game.shared.session else {return}
+        if let question = session.getCurrentQuestion()
+        {
+            question.auditoryHelp(session)
+            answersTable.reloadData()
+        }
+    }
+    
 }
 
 extension GameViewController: GameSessionDelegate {

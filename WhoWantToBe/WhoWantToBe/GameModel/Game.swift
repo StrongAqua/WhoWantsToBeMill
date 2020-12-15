@@ -13,8 +13,7 @@ class Game {
     
     var session: GameSession?
     
-    
-    private(set) var records: [Record] {
+    var records: [Record] {
         didSet {
             recordsCaretaker.save(records: self.records)
         }
@@ -22,7 +21,6 @@ class Game {
 
     private init() {
         self.records = self.recordsCaretaker.retrieveRecords()
-        
     }
 }
 
