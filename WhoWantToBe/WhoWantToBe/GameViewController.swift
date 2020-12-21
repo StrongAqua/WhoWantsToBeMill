@@ -19,10 +19,14 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var fiftyFifty: UIButton!
     @IBOutlet weak var askAudience: UIButton!
     
+    @IBOutlet weak var labelGameProgress: UILabel!
+
     var delegate: GameViewControllerDelegate?
     var userEventsDelegate: UserEventsDelegate?
     
     var defaultTextColor: UIColor?
+    
+    let gameProgressObserver = Observer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +38,12 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         // TODO: select one of these methods
         // Game.shared.session?.gameOverEvent = gameViewController.onGameOverEvent
         Game.shared.session?.gameSessionDelegate = self
+        
+        Game.shared.session?.answersCount.addObserver(gameProgressObserver) {
+            [weak self] value, options in
+            guard let self = self else {return}
+            self.labelGameProgress.text = "Вопрос №: \(value) из \(Game.shared.session?.questions.count ?? 0)"
+        }
         Game.shared.session?.nextQuestion()
         
         userEventsDelegate = Game.shared.session
@@ -105,8 +115,7 @@ extension GameViewController: GameSessionDelegate {
               let questionText = gameSession.currentQuestion?.question
         else {return}
 
-        let questionNumber = gameSession.answersCount
-        questionLabel.text = "Вопрос \(questionNumber)/5: \(questionText))"
+        questionLabel.text = questionText
         
         answersTable.reloadData()
     }

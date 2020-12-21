@@ -18,10 +18,10 @@ protocol UserEventsDelegate {
 
 class GameSession {
     
-    var questions: [Question] = []
-
+    let questions: [Question]
+    
     var currentQuestion: Question?
-    var answersCount: Int = 0
+    var answersCount: Observable<Int>
     
     // delegate 'port'
     weak var gameSessionDelegate: GameSessionDelegate?
@@ -29,8 +29,12 @@ class GameSession {
     // closure 'port'
     var gameOverEvent: ((Int, Int) -> Void)?
     
-    init() {
-        questions = QuestionsManager.shared.getQuestionsForGame()
+    init(strategy: QuestionsSequenceStrategy = .ordered) {
+        answersCount = Observable(0)
+        questions =
+            QuestionsManager.shared.getQuestionsForGame(
+                strategy: strategy
+            )
     }
     
     func getCurrentQuestion() -> Question? {
@@ -38,26 +42,26 @@ class GameSession {
     }
 
     func nextQuestion() {
-        answersCount = answersCount + 1
+        answersCount.value = answersCount.value + 1
 
-        if answersCount > questions.count {
+        if answersCount.value > questions.count {
             gameOver()
             return
         }
 
-        currentQuestion = questions[answersCount - 1]
+        currentQuestion = questions[answersCount.value - 1]
         gameSessionDelegate?.onNextQuestion(question: currentQuestion!)
     }
 
     func gameOver() {
-        answersCount -= 1
+        answersCount.value -= 1
 
         // call delegate
-        gameSessionDelegate?.onGameOver(answersCount, questions.count)
+        gameSessionDelegate?.onGameOver(answersCount.value, questions.count)
         // call closure
         // gameOverEvent?(answersCount, questions.count)
         
-        Game.shared.records.append(Record(date: Date(), value: answersCount))
+        Game.shared.records.append(Record(date: Date(), value: answersCount.value))
     }
 
 }

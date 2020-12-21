@@ -26,8 +26,9 @@ class StartViewController: UIViewController {
         case "StartGame":
             guard let gameViewController = segue.destination as? GameViewController else {return}
             gameViewController.delegate = self
-            
-            Game.shared.session = GameSession()
+            Game.shared.session = GameSession(
+                strategy: Game.shared.questionSelectStrategy
+            )
         default:
             break
         }
