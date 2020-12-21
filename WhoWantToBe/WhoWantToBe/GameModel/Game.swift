@@ -13,6 +13,8 @@ class Game {
     
     var session: GameSession?
     
+    var questionSelectStrategy: QuestionsSequenceStrategy = .random
+    
     var records: [Record] {
         didSet {
             recordsCaretaker.save(records: self.records)

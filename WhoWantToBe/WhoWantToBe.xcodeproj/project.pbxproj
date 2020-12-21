@@ -16,6 +16,11 @@
 		FE1327912582430200814013 /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1327902582430200814013 /* Questions.swift */; };
 		FE5FAACD2587B42300900095 /* RecordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5FAACC2587B42300900095 /* RecordsTableViewController.swift */; };
 		FE5FAAD1258940D600900095 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5FAAD0258940D600900095 /* SceneDelegate.swift */; };
+		FE5FAAD7258B6D1100900095 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5FAAD6258B6D1100900095 /* SettingsViewController.swift */; };
+		FE5FAADD258B83CB00900095 /* SelectSequenceStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5FAADC258B83CB00900095 /* SelectSequenceStrategy.swift */; };
+		FE5FAAE3259097B900900095 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5FAAE2259097B900900095 /* Observable.swift */; };
+		FE5FAAE82590A6AE00900095 /* AddQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5FAAE72590A6AE00900095 /* AddQuestionController.swift */; };
+		FE5FAAEB2590AC0E00900095 /* QuestionsCaretaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5FAAEA2590AC0E00900095 /* QuestionsCaretaker.swift */; };
 		FE8DB2622584E6F6003401D2 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8DB2612584E6F6003401D2 /* Game.swift */; };
 		FE8DB2662584E70A003401D2 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8DB2652584E70A003401D2 /* GameSession.swift */; };
 		FE8DB26925877EB9003401D2 /* RecordsCaretaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8DB26825877EB9003401D2 /* RecordsCaretaker.swift */; };
@@ -33,6 +38,11 @@
 		FE1327902582430200814013 /* Questions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
 		FE5FAACC2587B42300900095 /* RecordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTableViewController.swift; sourceTree = "<group>"; };
 		FE5FAAD0258940D600900095 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		FE5FAAD6258B6D1100900095 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		FE5FAADC258B83CB00900095 /* SelectSequenceStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSequenceStrategy.swift; sourceTree = "<group>"; };
+		FE5FAAE2259097B900900095 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		FE5FAAE72590A6AE00900095 /* AddQuestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionController.swift; sourceTree = "<group>"; };
+		FE5FAAEA2590AC0E00900095 /* QuestionsCaretaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsCaretaker.swift; sourceTree = "<group>"; };
 		FE8DB2612584E6F6003401D2 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		FE8DB2652584E70A003401D2 /* GameSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSession.swift; sourceTree = "<group>"; };
 		FE8DB26825877EB9003401D2 /* RecordsCaretaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsCaretaker.swift; sourceTree = "<group>"; };
@@ -52,6 +62,7 @@
 		FE13276B25811ADA00814013 = {
 			isa = PBXGroup;
 			children = (
+				FE5FAAE12590979200900095 /* Patterns */,
 				FE13277625811ADA00814013 /* WhoWantToBe */,
 				FE13277525811ADA00814013 /* Products */,
 			);
@@ -71,8 +82,10 @@
 				FE5FAAD0258940D600900095 /* SceneDelegate.swift */,
 				FE13277725811ADA00814013 /* AppDelegate.swift */,
 				FE13277B25811ADA00814013 /* StartViewController.swift */,
+				FE5FAAD6258B6D1100900095 /* SettingsViewController.swift */,
 				FE5FAACC2587B42300900095 /* RecordsTableViewController.swift */,
 				FE13278D2582354800814013 /* GameViewController.swift */,
+				FE5FAAE72590A6AE00900095 /* AddQuestionController.swift */,
 				FE8DB2602584E6B1003401D2 /* GameModel */,
 				FE13277D25811ADA00814013 /* Main.storyboard */,
 				FE13278025811ADC00814013 /* Assets.xcassets */,
@@ -82,12 +95,22 @@
 			path = WhoWantToBe;
 			sourceTree = "<group>";
 		};
+		FE5FAAE12590979200900095 /* Patterns */ = {
+			isa = PBXGroup;
+			children = (
+				FE5FAAE2259097B900900095 /* Observable.swift */,
+			);
+			path = Patterns;
+			sourceTree = "<group>";
+		};
 		FE8DB2602584E6B1003401D2 /* GameModel */ = {
 			isa = PBXGroup;
 			children = (
 				FE1327902582430200814013 /* Questions.swift */,
 				FE8DB2652584E70A003401D2 /* GameSession.swift */,
+				FE5FAADC258B83CB00900095 /* SelectSequenceStrategy.swift */,
 				FE8DB26825877EB9003401D2 /* RecordsCaretaker.swift */,
+				FE5FAAEA2590AC0E00900095 /* QuestionsCaretaker.swift */,
 				FE8DB2612584E6F6003401D2 /* Game.swift */,
 			);
 			path = GameModel;
@@ -163,15 +186,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE5FAAE3259097B900900095 /* Observable.swift in Sources */,
 				FE13278E2582354800814013 /* GameViewController.swift in Sources */,
 				FE8DB2622584E6F6003401D2 /* Game.swift in Sources */,
+				FE5FAAEB2590AC0E00900095 /* QuestionsCaretaker.swift in Sources */,
+				FE5FAAD7258B6D1100900095 /* SettingsViewController.swift in Sources */,
 				FE5FAAD1258940D600900095 /* SceneDelegate.swift in Sources */,
 				FE13277C25811ADA00814013 /* StartViewController.swift in Sources */,
 				FE5FAACD2587B42300900095 /* RecordsTableViewController.swift in Sources */,
 				FE13277825811ADA00814013 /* AppDelegate.swift in Sources */,
+				FE5FAAE82590A6AE00900095 /* AddQuestionController.swift in Sources */,
 				FE8DB2662584E70A003401D2 /* GameSession.swift in Sources */,
 				FE8DB26925877EB9003401D2 /* RecordsCaretaker.swift in Sources */,
 				FE1327912582430200814013 /* Questions.swift in Sources */,
+				FE5FAADD258B83CB00900095 /* SelectSequenceStrategy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
